@@ -17,11 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView a = new TextView(this);
-
-        a.setText("hello");
-
-
         myRecyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
