@@ -21,6 +21,11 @@ public class LoginFragment extends Fragment {
 
     private Button loginButton;
 
+    private LoginButtonListner listner;
+
+    public void setListner(LoginButtonListner listner) {
+        this.listner = listner;
+    }
 
     public LoginFragment() {
 
@@ -43,6 +48,17 @@ public class LoginFragment extends Fragment {
         userId = b.getInt(USER_ID);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if(!(getActivity() instanceof LoginButtonListner)) {
+            throw new RuntimeException("Please implment LoginButtonListner if you want to use LoginFragment");
+        }
+
+        this.listner = (LoginButtonListner)getActivity();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,7 +70,9 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(listner != null) {
+                    listner.onLoginButtonClicked();
+                }
             }
         });
 
@@ -66,5 +84,9 @@ public class LoginFragment extends Fragment {
         super.onSaveInstanceState(outState);
 
         outState.putInt("abcd", 100);
+    }
+
+    public static interface LoginButtonListner {
+        public void onLoginButtonClicked();
     }
 }
