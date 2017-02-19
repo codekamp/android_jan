@@ -12,7 +12,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void downloadImage(View view) {
-
+    public void fetchLists(View view) {
+        FetchLists a = new FetchLists();
+        a.execute(8,0);
     }
 }

@@ -11,8 +11,8 @@
     tools:context="in.codekamp.asynctaskdemo.MainActivity">
 
     <Button
-        android:text="download image"
-        android:onClick="downloadImage"
+        android:text="fetch mailchimp lists"
+        android:onClick="fetchLists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>
