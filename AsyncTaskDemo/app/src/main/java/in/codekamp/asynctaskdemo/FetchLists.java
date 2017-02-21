@@ -23,6 +23,11 @@ import java.util.List;
 
 public class FetchLists extends AsyncTask<Integer, Void, List<MailChimpList>> {
 
+    private FetchListListner listner;
+
+    public void setListner(FetchListListner listner) {
+        this.listner = listner;
+    }
 
     @Override
     protected List<MailChimpList> doInBackground(Integer... params) {
@@ -55,8 +60,6 @@ public class FetchLists extends AsyncTask<Integer, Void, List<MailChimpList>> {
             for (int i = 0; i < lists.length(); i++) {
                 JSONObject listData = (JSONObject) lists.get(i);
                 MailChimpList mailChimpList = new MailChimpList();
-                mailChimpList.id = listData.getString("name");
-                mailChimpList.title = listData.getString("name");
                 listTitles.add(mailChimpList);
             }
 
@@ -72,6 +75,11 @@ public class FetchLists extends AsyncTask<Integer, Void, List<MailChimpList>> {
 
     @Override
     protected void onPostExecute(List<MailChimpList> mailChimpLists) {
-        
+
+    }
+
+    public interface FetchListListner {
+        public void listsFetchedSuccessfully(List<MailChimpList> lists);
+        public void listsFetchedFailed(String errorMessage);
     }
 }
